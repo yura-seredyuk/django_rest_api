@@ -7,7 +7,7 @@ def get():
     pprint(response.json())
 
 def post():
-    data = {'apartaments': 34,
+    data = {'apartaments': 0,
             'city': 'Рівне',
             'country': 'Україна',
             'house_num': 46,
@@ -17,7 +17,25 @@ def post():
                             data=data)
     print(response.json(), response.status_code)
 
+def update():
+    data = {'apartaments': 0,
+            'city': 'Рівне',
+            'country': 'Україна',
+            'house_num': 46,
+            'street': 'Київська',
+            'zip_code': 33027}
+    response = requests.put('http://127.0.0.1:8000/address/14/',
+                            data=data)
+    print(response.json(), response.status_code)
+
+def delete():
+    response = requests.delete('http://127.0.0.1:8000/address/10/')
+    print("DELETE:", response.status_code)
+
+
 
 if __name__ == "__main__":
-    post()
-    get()
+    # post()
+    # get()
+    update()
+    # delete()

@@ -30,18 +30,29 @@ class AddressViev:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     class AddressDetail(APIView):
-        def get_object(self,pk):
+        def get_object(self, pk):
             try:
                 return Address.objects.get(pk=pk)
             except Address.DoesNotExist:
                 raise Http404
 
-        def get(self, pk):
+        def get(self, request, pk, format=None):
             address = self.get_object(pk)
+            serializer = AddressListSerializer(address)
+            return Response(serializer.data)
 
-        def put():
-            pass
-        
-        def delete():
-            pass
+        def put(self, request, pk, format=None):
+            data = request.data
+            address = self.get_object(pk)
+            serializer = AddressListSerializer(address, data=data, partial=True)
+            if serializer.is_valid():
+                print('vievs:',serializer.validated_data)
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        def delete(self, request, pk, format=None):
+            address = self.get_object(pk=pk)
+            address.delete()
+            return Response(status = status.HTTP_204_NO_CONTENT)
 

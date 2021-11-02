@@ -1,0 +1,9 @@
+CLASSWORK: https://github.com/yura-seredyuk/django_rest_api
+
+Додати валідацію полів:
+            # 'city':
+            # 'country': 
+            # 'house_num': 
+            # 'street': 
+            # 'zip_code':
+Покрити кожне поле негативним тестом, який би непройшов валідацію на методах POST та PUT
